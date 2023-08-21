@@ -7,11 +7,11 @@ const mongoose = require("mongoose");
 const ConnectDB = require("./connectDb");
 ConnectDB();
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+// const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog");
 const compression = require("compression");
 const { body, validationResult } = require("express-validator");
-const helment=require("helmet")
+const helmet = require("helmet");
 
 const app = express();
 
@@ -24,8 +24,6 @@ const limiter = RateLimit({
 // Apply rate limiter to all requests
 app.use(limiter);
 
-
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -36,7 +34,7 @@ app.use(
     directives: {
       "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
     },
-  }),
+  })
 );
 app.use(logger("dev"));
 app.use(express.json());
@@ -47,7 +45,7 @@ app.use(compression());
 
 app.use("/", indexRouter);
 
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 app.use("/catalog", catalogRouter);
 
 // catch 404 and forward to error handler
@@ -69,7 +67,6 @@ app.use(function (err, req, res, next) {
 // app.listen(3000, () => {
 //   console.log(`listing port ${3000}`);
 // });
-
 
 // app.use("/connect", function (req, res) {
 //   main().catch((err) => console.log(err));
